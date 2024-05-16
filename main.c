@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "scanner.h"
 
 void run_file(char *argc);
 void run_prompt();
 void run(char *buffer);
 
 int main(int argc, char *argv[]) {
-
+    
     if (argc > 2) {
         printf("usage: cinterpreter");
         exit(64);
@@ -64,5 +65,14 @@ void run_prompt() {
 
 void run(char *buffer) {
 
-    printf("%s\n", buffer);
+    struct Scanner *scanner = new_scanner(buffer);
+    struct Token *tokens = scan_tokens();
+    int size = sizeof(tokens) / sizeof(tokens[0]);
+
+    for (int i = 0; i < size; i++) {
+        struct Token token = tokens[i];
+        printf("%s", token.value);
+    }
+
+    free(scanner);
 }
