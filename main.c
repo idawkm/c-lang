@@ -75,4 +75,7 @@ void run(char *buffer) {
         printf("%d\n", (int) token.tokenType);
         
     }
+
+    free(scanner->tokens);
+    free(scanner);
 }
