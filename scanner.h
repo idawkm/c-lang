@@ -1,6 +1,9 @@
 #ifndef SCANNER_H
 #define SCANNER_H
 
+#include <stdlib.h>
+#include <string.h>
+
 struct Scanner {
     char *source;
     int tokens_size;
