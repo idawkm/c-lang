@@ -67,6 +67,33 @@ void scan_token() {
         case '*':
             add_token(STAR);
             break;
+        case '!':
+            //Todo - check next character
+            add_token(BANG);
+            break;
+        case '=':
+            //Todo - check next character
+            add_token(EQUAL);
+            break;
+        case '<':
+            //Todo - check next character
+            add_token(LESS);
+            break;
+        case '>':
+            //Todo - check next character
+            add_token(GREATER);
+            break;
+        case ' ':
+        case '\r':
+        case '\t':
+            break;
+        case '\n':
+            scanner->line++;
+            break;
+        case '"':
+            verify_string();
+            break;
+
     }
 }
 
@@ -93,4 +120,34 @@ int is_at_end() {
 char advance() {
 
     return scanner->source[scanner->current++];
+}
+
+char peek() {
+
+    if (is_at_end()) {
+        return '\0';
+    }
+
+    return scanner->source[scanner->current - 1];
+}
+
+void verify_string() {
+
+    while(peek() != '"'  && !is_at_end()) {
+        if (peek() == '\n') {
+            scanner->line += 1;
+        }
+        advance();
+    }
+
+    if (is_at_end()) {
+        //Todo - throw an error and
+        return;
+    }
+
+    advance();
+
+    //Todo - Add literal to the token
+    char value = scanner->source[scanner->current - 1];
+    append_token(STRING, NULL); 
 }
