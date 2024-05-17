@@ -73,6 +73,5 @@ char advance();
 void add_token(enum TokenType tokenType);
 struct Scanner* start_scanner(char *source);
 void append_token(enum TokenType tokenType, char *literal);
-char* substring(char *source, int start, int end);
 
 #endif

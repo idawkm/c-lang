@@ -72,7 +72,7 @@ void run(char *buffer) {
 
     for (int i = 0; i < scanner->tokens_size; i++) {
         struct Token token = tokens[i];
-        printf("%d\n", (int) token.tokenType);
+        printf("%d = %c\n", (int) token.tokenType, token.lexeme);
         
     }
 

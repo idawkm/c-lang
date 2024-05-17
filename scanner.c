@@ -77,24 +77,12 @@ void add_token(enum TokenType tokenType) {
 
 void append_token(enum TokenType tokenType, char *literal) {
     
-    char text = scanner->source[scanner->current];
+    char text = scanner->source[scanner->current - 1];
     struct Token token;
     token.tokenType = tokenType;
     token.line = scanner->line;
     token.lexeme = text;
     scanner->tokens[scanner->tokens_size++] = token;
-}
-
-char* substring(char *source, int start, int end) {
-
-    int size = end - start;
-    char *substr = (char *) malloc(size * sizeof(char));
-
-    for (int i=start; i < end; i++) {
-        substr[i] = source[i];
-    }
-
-    return substr;
 }
 
 int is_at_end() {
