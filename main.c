@@ -65,14 +65,14 @@ void run_prompt() {
 
 void run(char *buffer) {
 
-    struct Scanner *scanner = new_scanner(buffer);
+    struct Scanner *scanner = start_scanner(buffer);
     struct Token *tokens = scan_tokens();
-    int size = sizeof(tokens) / sizeof(tokens[0]);
+    
+    printf("token size: %d\n", scanner->tokens_size);
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < scanner->tokens_size; i++) {
         struct Token token = tokens[i];
-        printf("%s", token.value);
+        printf("%d\n", (int) token.tokenType);
+        
     }
-
-    free(scanner);
 }

@@ -3,6 +3,11 @@
 
 struct Scanner {
     char *source;
+    int tokens_size;
+    struct Token *tokens;
+    int start;
+    int line;
+    int current;
 };
 
 enum TokenType {
@@ -48,15 +53,23 @@ enum TokenType {
   TRUE, 
   VAR, 
   WHILE,
-
-  EOF
+  ENDOF
 };
 
 struct Token {
-    char *value;
+    enum TokenType tokenType;
+    char lexeme;
+    char* literal;
+    int line;
 };
 
 struct Token* scan_tokens();
-struct Scanner* new_scanner();
+void scan_token();
+int is_at_end();
+char advance();
+void add_token(enum TokenType tokenType);
+struct Scanner* start_scanner(char *source);
+void append_token(enum TokenType tokenType, char *literal);
+char* substring(char *source, int start, int end);
 
 #endif
